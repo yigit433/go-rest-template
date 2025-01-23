@@ -16,13 +16,13 @@ import (
 
 func main() {
 	configs.LoadEnv()
-	
+
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 
 	r := chi.NewRouter()
-    r.Use(middleware.Logger)
+	r.Use(middleware.Logger)
 
-    log.Info().Msg(fmt.Sprintf("🚀 Server is running on port %s", os.Getenv("PORT")))
+	log.Info().Msg(fmt.Sprintf("🚀 Server is running on port %s", os.Getenv("PORT")))
 
 	http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), r)
 }
