@@ -43,7 +43,7 @@ A reusable Go REST API template with Chi, modular structure & best practices!
 4. Run the server:
 
    ```bash
-   go run cmd/server/main.go
+   go run ./cmd/app/main.go
    ```
 
 5. The server will be available at `http://localhost:8080`.
