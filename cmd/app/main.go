@@ -9,6 +9,7 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/yigit433/go-rest-template/internal/configs"
+	"github.com/yigit433/go-rest-template/internal/app/routes/tasks"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -21,6 +22,11 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
+	r.Use(middleware.RequestID)
+	r.Use(middleware.RealIP)
+
+	tasksrouter.SetupRouter(r)
 
 	log.Info().Msg(fmt.Sprintf("🚀 Server is running on port %s", os.Getenv("PORT")))
 
