@@ -50,7 +50,7 @@ func NewMongoAdapter() {
 		return
 	}
 
-	logging.CustomLogger.Info("✅ Database connection established successfully!", map[string]interface{}{"eventId": "connect_db", "dbName": dbName, "dbHost": dbUri})
+	logging.CustomLogger.Info("✅ Database connection established successfully!", map[string]interface{}{"eventId": "connect_db", "dbName": dbName, "provider": "MongoDB"})
 
 	Mongo = &MongoAdapter{
 		Client: client,
