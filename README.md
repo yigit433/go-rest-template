@@ -102,8 +102,10 @@ All HTTP requests and responses are logged to the console for debugging and moni
 Example log output:
 
 ```
-2025/01/23 12:34:56 Started GET /tasks from 127.0.0.1
-2025/01/23 12:34:56 Completed in 5ms
+2025-01-26T13:17:59+03:00 INF [App: app] 🔧 '.env' file loaded and settings applied seamlessly! eventId=config_load
+2025-01-26T13:17:59+03:00 ERR [App: app] ⚠️ 'MONGO_URI' is not set in the environment variables eventId=dbconfig_load
+2025-01-26T13:17:59+03:00 INF [App: app] 🚀 Server is running eventId=startup port=8080
+2025/01/26 13:18:24 "GET http://localhost:8080/tasks HTTP/1.1" from [::1]:58303 - 200 8B in 0s
 ```
 
 ---

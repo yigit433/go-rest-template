@@ -6,19 +6,21 @@ import (
 
 	"os"
 
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
-	"github.com/yigit433/go-rest-template/internal/configs"
+	// "github.com/rs/zerolog"
+	// "github.com/rs/zerolog/log"
 	"github.com/yigit433/go-rest-template/internal/app/routes/tasks"
+	"github.com/yigit433/go-rest-template/internal/configs"
+	"github.com/yigit433/go-rest-template/internal/database"
+	"github.com/yigit433/go-rest-template/internal/logging"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
 
 func main() {
+    logging.InitializeLogger("info", "app")
 	configs.LoadEnv()
-
-	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	database.NewMongoAdapter()
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
@@ -28,7 +30,7 @@ func main() {
 
 	tasksrouter.SetupRouter(r)
 
-	log.Info().Msg(fmt.Sprintf("🚀 Server is running on port %s", os.Getenv("PORT")))
+	logging.CustomLogger.Info("🚀 Server is running", map[string]interface{}{"port": os.Getenv("PORT"), "eventId": "startup"})
 
 	http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), r)
 }
